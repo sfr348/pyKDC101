@@ -9,9 +9,9 @@ from pyKDC101 import KDC
 
 # %% --------------------------------------------------------------------------
 # connect stage
-kdc = KDC()  # open first port found
+# kdc = KDC()  # open first port found
 # kdc = KDC(port='/dev/ttyUSB0')  # open with specified port
-# kdc = KDC(SN='12345678')  # open with specified serial number
+kdc = KDC(SN='12345678')  # open with specified serial number
 
 # let the display flash
 kdc.identify()
