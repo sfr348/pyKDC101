@@ -11,10 +11,15 @@ import sys
 class KDC():
     # --------------------------------------------------------------------------
     # PARAMETERS (PRM1-Z8)
+    # PRM1_EncCnt = 34554.96 # EncCnt per degree
+    # PRM1_sf_vel = 772981.3692 # scaling factor velocity (mm/s)
+    # PRM1_sf_acc = 263.8443072 # scaling factor acceleration (mm/s^2)
+
+    # PARAMETERS (MTS50-Z8)
     PRM1_EncCnt = 1919.6418578623391 # EncCnt per degree
     PRM1_sf_vel = 42941.66 # scaling factor velocity (deg/s)
     PRM1_sf_acc = 14.66 # scaling factor acceleration (deg/s^2)
-    
+
     # set this for more output info
     DEBUG = False
     
