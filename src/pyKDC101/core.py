@@ -16,9 +16,9 @@ class KDC():
     # PRM1_sf_acc = 263.8443072 # scaling factor acceleration (mm/s^2)
 
     # PARAMETERS (MTS50-Z8)
-    PRM1_EncCnt = 1919.6418578623391 # EncCnt per degree
-    PRM1_sf_vel = 42941.66 # scaling factor velocity (deg/s)
-    PRM1_sf_acc = 14.66 # scaling factor acceleration (deg/s^2)
+    PRM1_EncCnt = 34304 # EncCnt per mm
+    PRM1_sf_vel = 767367.49 # scaling factor velocity (deg/s)
+    PRM1_sf_acc = 261.93 # scaling factor acceleration (deg/s^2)
 
     # set this for more output info
     DEBUG = False
@@ -261,53 +261,52 @@ class KDC():
         
         mID = reply[0:5] # get the first two bytes as message ID
         # header = reply[0:17] # get the first 6 bytes as header
-        match mID:
-            case '06 00':
-                # hardware info, 90 bytes (always including header)
-                msg = 'hardware info'
-                length = 84
-            case '0b 04':
-                msg = 'Enccounter'
-                length = 6
-            case '12 04':
-                msg = 'Poscounter'
-                length = 6
-            case '15 04':
-                msg = 'Velparams'
-                length = 14
-            case '18 04':
-                msg = 'Jogparams'
-                length = 22
-            case '22 05':
-                msg ='MMI parameters'
-                length = 36
-            case '3c 04':
-                msg = 'GenMoveparams'
-                length = 6
-            case '42 04':
-                msg = 'Homeparams'
-                length = 14
-            case '44 04':
-                msg = 'homed'
-                length = 0
-            case '47 04':
-                msg = 'Moverelparams'
-                length = 6
-            case '52 04':
-                msg = 'Moveabsparams'
-                length = 6
-            case '64 04':
-                msg = 'moved'
-                length = 14
-            case '66 04':
-                msg = 'stopped'
-                length = 14
-                
-            case _:
-                print('not a recogniced message ID:', mID)
-                msg = ''
-                length = 0
-        
+        if mID ==  '06 00':
+            # hardware info, 90 bytes (always including header)
+            msg = 'hardware info'
+            length = 84
+        elif mID == '0b 04':
+            msg = 'Enccounter'
+            length = 6
+        elif mID == '12 04':
+            msg = 'Poscounter'
+            length = 6
+        elif mID == '15 04':
+            msg = 'Velparams'
+            length = 14
+        elif mID == '18 04':
+            msg = 'Jogparams'
+            length = 22
+        elif mID == '22 05':
+            msg ='MMI parameters'
+            length = 36
+        elif mID == '3c 04':
+            msg = 'GenMoveparams'
+            length = 6
+        elif mID == '42 04':
+            msg = 'Homeparams'
+            length = 14
+        elif mID == '44 04':
+            msg = 'homed'
+            length = 0
+        elif mID == '47 04':
+            msg = 'Moverelparams'
+            length = 6
+        elif mID == '52 04':
+            msg = 'Moveabsparams'
+            length = 6
+        elif mID == '64 04':
+            msg = 'moved'
+            length = 14
+        elif mID == '66 04':
+            msg = 'stopped'
+            length = 14
+
+        else:
+            print('not a recogniced message ID:', mID)
+            msg = ''
+            length = 0
+
         # extract parameter (if more than 6 bytes)
         if length > 0:
             msg_params = reply[18:18+(3*length-1)]
